@@ -1,0 +1,56 @@
+{
+    "meta_event": {
+        "player_id": "string",
+        "event": "enum{JOINED,DISCONNECTED,KICKED,ADMINED}",
+        "timestamp": "epoch"
+    },
+    "player_game_datum": {
+        "player_id": "string",
+        "player_nickname": "string",
+        "points_total": "int",
+        "initial_play_order": "int"
+    },
+    "card": {
+        "suit": "enum{SWORD,CLUB,GOLD,CUP}",
+        "value": "enum{0,1,2,3,4,5,6,7,8,9}"
+    },
+    "player_match_datum": {
+        "player_id": "string",
+        "cards_dealt": ["card"],
+        "bid": "int",
+        "points_won": "int"
+    },
+    "turn": {
+        "player_id": "string",
+        "card_played": "card",
+        "start_timestamp": "epoch",
+        "end_timestamp": "epoch"
+    },
+    "round": {
+        "round_number": "int",
+        "winner_player_id": "string",
+        "start_timestamp": "epoch",
+        "end_timestamp": "epoch",
+        "turns": ["turn"]
+    },
+    "match": {
+        "match_number": "int",
+        "dealer_player_id": "string",
+        "trump": "card",
+        "player_match_data": ["player_match_datum"],
+        "start_timestamp": "epoch",
+        "end_timestamp": "epoch",
+        "rounds": ["round"]
+    },
+    "game": {
+        "id": "string",
+        "room_number": "string",
+        "created_timestamp": "epoch",
+        "turn_time_limit": "int",
+        "bid_time_limit": "int",
+        "status": "enum{PRE_GAME,ORDER_PICK,IN_PRGRESS,HALF_TIME,POST_GAME}",
+        "meta_events": ["meta_event"],
+        "player_game_data": ["player_game_datum"],
+        "matches": ["match"]
+    }
+}
