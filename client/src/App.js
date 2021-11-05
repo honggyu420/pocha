@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
-import io from "socket.io-client";
-const ENDPOINT = "http://localhost:4001";
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-  const [response, setResponse] = useState("");
-
-  useEffect(() => {
-    const socket = io(ENDPOINT, {
-      withCredentials: true
-    });
-    socket.on("FromAPI", data => {
-      setResponse(data);
-    });
-  }, []);
-
   return (
-    <p>
-      It's <time dateTime={response}>{response}</time>
-    </p>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Hello World
+        </a>
+      </header>
+    </div>
   );
 }
 

@@ -1,0 +1,44 @@
+services:
+  client:
+    build: ./client
+    command: npm start
+    volumes:
+     - ./client:/app
+    ports:
+      - 5002:3000
+    networks:
+      - front-tier
+
+  server:
+    build: ./server
+    command: nodemon server.js
+    depends_on:
+      redis:
+        condition: service_healthy 
+    volumes:
+      - ./server:/app
+    ports:
+      - 5003:80
+    networks:
+      - back-tier
+      - front-tier
+
+  redis:
+    image: redis:5.0-alpine3.10
+    volumes:
+      - ./healthchecks:/healthchecks
+    healthcheck:
+      test: /healthchecks/redis.sh
+      interval: "5s"
+    ports: ["6379"]
+    networks:
+      - back-tier
+    volumes:
+     - redis-data:/var/lib/redis
+
+volumes:
+  redis-data:
+
+networks:
+  front-tier:
+  back-tier:
