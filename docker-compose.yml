@@ -3,7 +3,7 @@ services:
     build: ./client
     command: npm start
     volumes:
-     - ./client:/app
+     - ./client:/usr/src/app
     ports:
       - 5002:3000
     networks:
@@ -12,11 +12,8 @@ services:
   server:
     build: ./server
     command: nodemon server.js
-    depends_on:
-      redis:
-        condition: service_healthy 
     volumes:
-      - ./server:/app
+      - ./server:/usr/src/app
     ports:
       - 5003:80
     networks:
